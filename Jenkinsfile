@@ -4,16 +4,13 @@ pipeline {
             label 'AGENT-1'
         }
     }
-
     environment { 
         GREETING = 'Hello Jenkins'
     }
-
     options {
         timeout(time: 1, unit: 'HOURS')
         disableConcurrentBuilds()
     }
-
     parameters {
         string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
 
@@ -25,7 +22,7 @@ pipeline {
 
         password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
     }
-
+    // build
     stages {
         stage('Build') {
             steps {
@@ -46,9 +43,7 @@ pipeline {
                 """
             }
         }
-    }
-
-     stage('check params'){
+        stage('check params'){
             steps{
                 sh """
                     echo "Hello ${params.PERSON}"
@@ -63,9 +58,8 @@ pipeline {
                 """
             }
         }
-
-
-     // post build
+    }
+    // post build
     post { 
         always { 
             echo 'I will always say Hello again!'
