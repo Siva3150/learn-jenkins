@@ -5,6 +5,10 @@ pipeline {
         }
     }
 
+    environment { 
+        GREETING = 'Hello Jenkins'
+    }
+
     stages {
         stage('Build') {
             steps {
@@ -18,7 +22,11 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying....'
+                sh """
+                    echo  "Here I wrote shell script"
+                    echo "$GREETING"
+                    #sleep 10
+                """
             }
         }
     }
